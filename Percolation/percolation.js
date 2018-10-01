@@ -139,6 +139,7 @@ class Draw {
   position(i) {
     let gridPosition = (this.canvasSize - this.gridLength * this.size) / 2 + (i - 1) * this.gridLength;
     return gridPosition;
+    //400 - 100 * 3
   }
 
   drawGrids() {
@@ -149,6 +150,7 @@ class Draw {
           this.ctx.fillRect(this.position(j), this.position(i), this.gridLength, this.gridLength);
         } else if (this.percolate.isOpen(i, j)) {
           this.ctx.fillStyle = "white";
+          // this.ctx.fillText("8", this.position(j), this.position(i));
           this.ctx.fillRect(this.position(j), this.position(i), this.gridLength, this.gridLength);
         } else {
           this.ctx.fillStyle = "black";
@@ -160,7 +162,7 @@ class Draw {
 }
 
 function simulate() {
-  let size = 100;
+  let size = 20;
   let delay = 0;
   let percolate = new Percolation(size);
   let drawP = new Draw(size, percolate);
