@@ -6,10 +6,18 @@
     <script type="text/javascript" src="puzzle.js"></script>
   </head>
   <body>
-    <button type='button' id="button" onclick="return simulate()">Run Simulation</button>
-    <button type='button' id="button" onclick="return simulateBFS()">BFS</button>
+    <!-- <button type='button' id="button" onclick="return simulate()">Run Simulation</button> -->
+
+    <form id="inputs">
+      Dimension (N-by-N grid): <input type="radio" name="dimension" value="3x3"> 3x3
+      <input type="radio" name="dimension" value="4x4" checked> 4x4<br>
+      Shuffle Times : <input type="text" id="shuffleTimes" value="12"><br>
+      <button type='button' id="button" onclick="return simulate()">Run & Simulation</button>
+      <button type='button' id="button" onclick="return simulateBFS()">BFS</button>
+      <button type='button' id="button" onclick="return simulateAStar()">A*</button>
+    </form>
     <canvas id="animation" width="300" height="300">
-        Percolation Visualization (include img)
+
     </canvas>
   </body>
 </html>

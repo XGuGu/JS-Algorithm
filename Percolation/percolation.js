@@ -162,8 +162,8 @@ class Draw {
 }
 
 function simulate() {
-  let size = 20;
-  let delay = 0;
+  let size = 30;
+  let delay = 50;
   let percolate = new Percolation(size);
   let drawP = new Draw(size, percolate);
   let count = 0;

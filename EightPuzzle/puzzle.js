@@ -1,7 +1,107 @@
+class MinHeap {
+  constructor(array, comparator) {
+    this.heap = array || new Array();
+    this.compare = comparator || function(item1, item2) {
+      return item1 == item2 ? 0 : item1 < item2 ? -1 : 1;
+    };
+    this.left = function(i) {
+      return 2 * i + 1;
+    };
+    this.right = function(i) {
+      return 2 * i + 2;
+    };
+    this.parent = function(i) {
+      return Math.ceil(i / 2) - 1;
+    };
+    this.heapify = function(i) {
+		var lIdx = this.left(i);
+ 		var rIdx = this.right(i);
+  		var smallest;
+  		if (lIdx < this.heap.length
+  				&& this.compare(this.heap[lIdx], this.heap[i]) < 0) {
+  			smallest = lIdx;
+  		} else {
+  			smallest = i;
+  		}
+  		if (rIdx < this.heap.length
+  				&& this.compare(this.heap[rIdx], this.heap[smallest]) < 0) {
+  			smallest = rIdx;
+  		}
+  		if (i != smallest) {
+  			var temp = this.heap[smallest];
+  			this.heap[smallest] = this.heap[i];
+  			this.heap[i] = temp;
+  			this.heapify(smallest);
+  		}
+  	};
+
+    this.siftUp = function(i) {
+ 		var p = this.parent(i);
+ 		if (p >= 0 && this.compare(this.heap[p], this.heap[i]) > 0) {
+ 			var temp = this.heap[p];
+ 		  this.heap[p] = this.heap[i];
+ 			this.heap[i] = temp;
+ 			this.siftUp(p);
+   		}
+   	};
+
+    this.heapifyArray = function() {
+ 		var i = Math.floor(this.heap.length / 2) - 1;
+ 		for (; i >= 0; i--) {
+ 			this.heapify(i);
+   		}
+   	};
+    if (array != null) {
+      this.heapifyArray();
+    }
+  }
+
+  push(item) {
+    this.heap.push(item);
+    this.siftUp(this.heap.length - 1);
+  }
+
+  insert(item) {
+    this.push(item);
+  }
+
+  pop() {
+    var value;
+    if (this.heap.length > 1) {
+      value = this.heap[0];
+      this.heap[0] = this.heap.pop();
+      this.heapify(0);
+    } else {
+      value = this.heap.pop();
+    }
+    return value;
+  }
+
+  remove() {
+    return this.pop();
+  }
+
+  getMin() {
+    return this.heap[0];
+  }
+
+  size() {
+    return this.heap.length;
+  }
+}
+
+
+
 class Puzzle {
-  constructor() {
-    this.dimension = 3;
-    this.board = [ [ 1, 2, 3 ], [ 4, 5, 6 ], [ 7, 8, 0 ] ];
+  constructor(n) {
+    this.dimension = n;
+    this.board = [];
+    if (n === 3) {
+      this.board = [ [ 1, 2, 3 ], [ 4, 5, 6 ], [ 7, 8, 0 ] ];
+    }
+    if (n === 4) {
+      this.board = [ [ 1, 2, 3, 4 ], [ 5, 6, 7, 8 ], [ 9, 10, 11, 12 ], [ 13, 14, 15, 0 ] ];
+    }
     this.path = [];
     this.lastMove = null;
   }
@@ -153,7 +253,69 @@ class Puzzle {
     }
   }
 
+  dfs() {
+    //later
+  }
 
+  g() {
+    return this.path.length;
+  }
+
+  h1() {
+    let count = 0;
+    for (var i = 0; i < this.dimension; i++) {
+      for (var j = 0; j < this.dimension; j++) {
+          let piece = this.board[i][j];
+          if (piece != 0) {
+              let originalLine = Math.floor((piece - 1) / this.dimension);
+              let originalColumn = (piece - 1) % this.dimension;
+              if (i != originalLine || j != originalColumn) count++;
+            }
+        }
+    }
+    return count;
+  }
+
+  h2() {
+    let distance = 0;
+    for (var i = 0; i < this.dimension; i++) {
+      for (var j = 0; j < this.dimension; j++) {
+        let piece = this.board[i][j];
+        if (piece != 0) {
+            let originalLine = Math.floor((piece - 1) / this.dimension);
+            let originalColumn = (piece - 1) % this.dimension;
+            distance += Math.abs(i - originalLine) + Math.abs(j - originalColumn);
+        }
+      }
+    }
+    return distance;
+  }
+
+  aStar() {
+    let states = new MinHeap(null, function(a, b) {
+      return a.distance - b.distance;
+    });
+    this.path = [];
+    states.push({
+      puzzle: this,
+      distance: 0
+    });
+    while (states.size() > 0) {
+      let state = states.pop().puzzle;
+      if (state.isDone()) {
+        return state.path;
+      }
+      let children = state.visit();
+      for (var i = 0; i < children.length; i++) {
+        let child = children[i];
+        let f = child.g() + child.h2();
+        states.push({
+          puzzle: child,
+          distance: f
+        });
+      }
+    }
+  }
 
 }
 
@@ -177,12 +339,12 @@ class Draw {
   drawGrids() {
     for(var i = 1; i < this.size + 1; i++) {
       for (var j = 1; j < this.size + 1; j++) {
-        this.ctx.fillStyle = "black";
+        this.ctx.fillStyle = "lightblue";
         this.ctx.fillRect(this.position(j), this.position(i), this.gridLength, this.gridLength);
         if (this.puzzle.board[i - 1][j - 1] != 0) {
-          this.ctx.font="20px Georgia";
-          this.ctx.fillStyle = "white";
-          this.ctx.fillText(this.puzzle.board[i - 1][j -1], this.position(j)+50, this.position(i)+50);
+          this.ctx.font=font;
+          this.ctx.fillStyle = "black";
+          this.ctx.fillText(this.puzzle.board[i - 1][j -1], this.position(j)+skew, this.position(i)+skew);
         } else {
           this.ctx.fillStyle = "white";
           this.ctx.fillRect(this.position(j), this.position(i), this.gridLength, this.gridLength);
@@ -193,13 +355,73 @@ class Draw {
 
 }
 
-let puzzle = new Puzzle();
+// let shuffleTimes = 12;
+// let three = false;
+// let four = true;
+// // debugger
+//
+// let dimension;
+// let font;
+// let skew;
+// if (three) {
+//   dimension = 3;
+//   font = "30px Georgia";
+//   skew = 50;
+// }
+// if (four) {
+//   dimension = 4;
+//   font = "20px Georgia";
+//   skew = 34;
+// }
+let dimension;
+let font;
+let skew;
+
+let size
+let puzzle
+let interval;
+let shuffleTimes;
 
 function simulate() {
-  let size = 3;
+  let three;
+  let four;
+  // debugger
+  let gridSize = document.getElementsByName('dimension');
+  for (var k = 0; k < gridSize.length; k++) {
+    if (gridSize[k].checked) {
+      if (gridSize[k].value === "3x3") {
+        three = true;
+        four = false;
+      } else if (gridSize[k].value === "4x4") {
+        four = true;
+        three = false;
+      }
+      break;
+    }
+  }
+
+  shuffleTimes = +document.getElementById("shuffleTimes").value;
+  // debugger
+
+  // let dimension;
+  // let font;
+  // let skew;
+  if (three) {
+    dimension = 3;
+    font = "30px Georgia";
+    skew = 50;
+  }
+  if (four) {
+    dimension = 4;
+    font = "20px Georgia";
+    skew = 34;
+  }
+
+  size = dimension;
+  puzzle = new Puzzle(size);
+
+
   let drawP = new Draw(size, puzzle);
-  let interval;
-  puzzle.move(8);
   drawP.drawGrids(size, puzzle);
   let i = 0;
 
@@ -212,7 +434,7 @@ function simulate() {
     puzzle.move(moveGrid);
     drawP.drawGrids(size, puzzle);
     i++;
-    if(i > 30) {
+    if(i >= shuffleTimes) {
       clearInterval(interval);
     }
   }
@@ -225,7 +447,45 @@ function simulate() {
 }
 
 function simulateBFS() {
-  console.log(puzzle.board);
+  let drawP = new Draw(size, puzzle);
+  let date1 = new Date();
+  let path = puzzle.bfs();
+  let date2 = new Date();
+  console.log(date2 - date1);
+  drawP.drawGrids(size, puzzle);
+
+  function move() {
+    let step;
+    if (path.length > 0) {
+      step = path.shift();
+      puzzle.move(step);
+      drawP.drawGrids(size, puzzle);
+    } else {
+      clearInterval(interval);
+    }
+  }
+  interval = setInterval(move, 300);
+}
+
+function simulateAStar() {
+  let drawP = new Draw(size, puzzle);
+  let date1 = new Date();
+  let path = puzzle.aStar();
+  let date2 = new Date();
+  console.log(date2 - date1);
+  drawP.drawGrids(size, puzzle);
+
+  function move() {
+    let step;
+    if (path.length > 0) {
+      step = path.shift();
+      puzzle.move(step);
+      drawP.drawGrids(size, puzzle);
+    } else {
+      clearInterval(interval);
+    }
+  }
+  interval = setInterval(move, 300);
 }
 
 // let game = new Puzzle;
