@@ -4,20 +4,38 @@
     <meta charset="utf-8">
     <title>8 Puzzle</title>
     <script type="text/javascript" src="puzzle.js"></script>
+    <link rel="stylesheet" type="text/css" href="./puzzle.css"/>
   </head>
   <body>
     <!-- <button type='button' id="button" onclick="return simulate()">Run Simulation</button> -->
-
+    <h1>8 Puzzle Solver</h1>
+    <h2>The Problem</h2>
+    <p>The 8 puzzle problem is a puzzle invented and popularized by Noyes Palmer Chapman in the 1870s.
+      It is played on a 3-by-3 grid with 8 square puzzle labeled 1 through 8 and a blank space.
+      The player is permitted to slide puzzle horizontally or vertically into the blank space.
+    </p>
     <form id="inputs">
-      Dimension (N-by-N grid): <input type="radio" name="dimension" value="3x3"> 3x3
-      <input type="radio" name="dimension" value="4x4" checked> 4x4<br>
+      Dimension (N-by-N grid): <input type="radio" name="dimension" value="3x3" checked> 3x3
+      <input type="radio" name="dimension" value="4x4"> 4x4
+      <input type="radio" name="dimension" value="5x5"> 5x5<br>
       Shuffle Times : <input type="text" id="shuffleTimes" value="12"><br>
-      <button type='button' id="button" onclick="return simulate()">Run & Simulation</button>
+      <button type='button' id="button" onclick="return simulate()">Run & Shuffle</button>
       <button type='button' id="button" onclick="return simulateBFS()">BFS</button>
       <button type='button' id="button" onclick="return simulateAStar()">A*</button>
     </form>
-    <canvas id="animation" width="300" height="300">
+    <canvas id="animation" width="500" height="500">
 
     </canvas>
+    <p id="insert">Run Time:</p>
+    <h2>Algorithm Used</h2>
+    <h3>Breadth First Search(BFS)</h3>
+      <p>This is the most well known graph search algorithm. For each visited node, we immediately generate its childen and store it to the queue.
+        and we will recursively do this util the queue is empty or the end state is reached.
+        But, it is too slow. If you increase the shuffle time, the browser will crush.
+      </p>
+    <h3>A* (Manhattan distance)</h3>
+      <p>
+        This works
+      </p>
   </body>
 </html>

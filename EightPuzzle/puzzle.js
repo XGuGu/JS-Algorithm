@@ -102,6 +102,15 @@ class Puzzle {
     if (n === 4) {
       this.board = [ [ 1, 2, 3, 4 ], [ 5, 6, 7, 8 ], [ 9, 10, 11, 12 ], [ 13, 14, 15, 0 ] ];
     }
+    if (n === 5) {
+      this.board = [
+        [1, 2, 3, 4, 5],
+        [6, 7, 8, 9, 10],
+        [11, 12, 13, 14, 15],
+        [16, 17, 18, 19, 20],
+        [21, 22, 23, 24, 0]
+      ]
+    }
     this.path = [];
     this.lastMove = null;
   }
@@ -328,7 +337,7 @@ class Draw {
     this.canvasSize = this.canvas.width;
     this.gridLength = Math.floor(this.canvasSize / n);
     this.ctx.fillStyle = "grey";
-    this.ctx.fillRect(0, 0, this.canvasSize, this.canvasSize);
+    this.ctx.fillRect(0, 0, this.canvasSize, this.canvasSize);``
   }
 
   position(i) {
@@ -337,16 +346,19 @@ class Draw {
   }
 
   drawGrids() {
+    this.ctx.clearRect(0, 0, 600, 600);
     for(var i = 1; i < this.size + 1; i++) {
       for (var j = 1; j < this.size + 1; j++) {
         this.ctx.fillStyle = "lightblue";
         this.ctx.fillRect(this.position(j), this.position(i), this.gridLength, this.gridLength);
+        this.ctx.strokeStyle="darkblue";
+        this.ctx.strokeRect(this.position(j), this.position(i), this.gridLength, this.gridLength);
         if (this.puzzle.board[i - 1][j - 1] != 0) {
           this.ctx.font=font;
           this.ctx.fillStyle = "black";
-          this.ctx.fillText(this.puzzle.board[i - 1][j -1], this.position(j)+skew, this.position(i)+skew);
+          this.ctx.fillText(this.puzzle.board[i - 1][j -1], this.position(j)+skew, this.position(i)+topskew);
         } else {
-          this.ctx.fillStyle = "white";
+          this.ctx.fillStyle = "lightgrey";
           this.ctx.fillRect(this.position(j), this.position(i), this.gridLength, this.gridLength);
         }
       }
@@ -373,6 +385,19 @@ class Draw {
 //   font = "20px Georgia";
 //   skew = 34;
 // }
+// var canvas = document.getElementById("animation");
+document.addEventListener('DOMContentLoaded', () => {
+  var canvas = document.getElementById('animation');
+  // debugger
+  var ctx = canvas.getContext('2d');
+  ctx.fillStyle = "lightgrey";
+  ctx.fillRect(0,0,500,500);
+
+});
+
+
+
+
 let dimension;
 let font;
 let skew;
@@ -385,6 +410,7 @@ let shuffleTimes;
 function simulate() {
   let three;
   let four;
+  let five;
   // debugger
   let gridSize = document.getElementsByName('dimension');
   for (var k = 0; k < gridSize.length; k++) {
@@ -392,9 +418,15 @@ function simulate() {
       if (gridSize[k].value === "3x3") {
         three = true;
         four = false;
+        five = false;
       } else if (gridSize[k].value === "4x4") {
         four = true;
         three = false;
+        five = false;
+      } else if (gridSize[k].value === "5x5") {
+        five = true;
+        three = false;
+        four = false;
       }
       break;
     }
@@ -406,15 +438,24 @@ function simulate() {
   // let dimension;
   // let font;
   // let skew;
+  // five = true;
+  if (five) {
+    dimension = 5;
+    font = "30px Georgia";
+    skew = 40;
+    topskew = 55;
+  }
   if (three) {
     dimension = 3;
-    font = "30px Georgia";
-    skew = 50;
+    font = "60px Georgia";
+    skew = 70;
+    topskew = 100;
   }
   if (four) {
     dimension = 4;
-    font = "20px Georgia";
-    skew = 34;
+    font = "45px Georgia";
+    skew = 45;
+    topskew = 75;
   }
 
   size = dimension;
@@ -452,6 +493,8 @@ function simulateBFS() {
   let path = puzzle.bfs();
   let date2 = new Date();
   console.log(date2 - date1);
+  let runTime = date2 - date1;
+  document.getElementById("insert").innerHTML = `Run Time: ${runTime} ms`;
   drawP.drawGrids(size, puzzle);
 
   function move() {
@@ -473,6 +516,8 @@ function simulateAStar() {
   let path = puzzle.aStar();
   let date2 = new Date();
   console.log(date2 - date1);
+  let runTime = date2 - date1;
+  document.getElementById("insert").innerHTML = `Run Time: ${runTime} ms`;
   drawP.drawGrids(size, puzzle);
 
   function move() {
