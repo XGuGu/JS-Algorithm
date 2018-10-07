@@ -1,3 +1,5 @@
+//The MinHeap is from the http://www.digitaltsunami.net/projects/javascript/minheap/index.html
+
 class MinHeap {
   constructor(array, comparator) {
     this.heap = array || new Array();
@@ -408,6 +410,7 @@ let interval;
 let shuffleTimes;
 
 function simulate() {
+  document.getElementById("insert").innerHTML = "Run Time:";
   let three;
   let four;
   let five;

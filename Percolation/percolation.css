@@ -1,0 +1,50 @@
+.wrapper {
+  padding-left: 100px;
+  padding-right: 100px;
+}
+
+.input-form {
+  margin-left: 100px;
+}
+
+canvas {
+  border: 1px solid black;
+  border-radius: 8px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+.data {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+img {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+.h3 {
+  margin-left: 100px;
+}
+
+.h4 {
+  margin-left: 120px;
+}
+
+.problem {
+  margin-left: 20px;
+  padding-top: 0px;
+}
+
+.details {
+  margin-left: 20px;
+}
+
+.model {
+  margin-left: 20px;
+}

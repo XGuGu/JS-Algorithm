@@ -7,18 +7,31 @@
     <link rel="stylesheet" type="text/css" href="./puzzle.css"/>
   </head>
   <body>
-    <!-- <button type='button' id="button" onclick="return simulate()">Run Simulation</button> -->
-    <h1>8 Puzzle Solver</h1>
-    <h2>The Problem</h2>
-    <p>The 8 puzzle problem is a puzzle invented and popularized by Noyes Palmer Chapman in the 1870s.
-      It is played on a 3-by-3 grid with 8 square puzzle labeled 1 through 8 and a blank space.
-      The player is permitted to slide puzzle horizontally or vertically into the blank space.
-    </p>
-    <form id="inputs">
+    <div class="header">
+      <h1>8 Puzzle Solver</h1>
+      <div class="info">
+        Created by:
+        <a href="#">Lingjie Zhang</a>
+        <a href="https://github.com/XGuGu/JS-Algorithm">GitHub</a>
+        <a href="https://www.linkedin.com/in/lingjie-zhang-1109b5171/">LinkedIn</a>
+      </div>
+    </div>
+    <div class="wrapper">
+      <h3>The Problem</h3>
+      <p class="problem">The 8 puzzle problem is a puzzle invented and popularized by Noyes Palmer Chapman in the 1870s.
+        It is played on a 3-by-3 grid with 8 square puzzle labeled 1 through 8 and a blank space.
+        The player is permitted to slide puzzle horizontally or vertically into the blank space.
+      </p>
+      <p class="details">Details for this problem is from <a href="http://coursera.cs.princeton.edu/algs4/assignments/8puzzle.html">here</a>.</p>
+
+    </div>
+    <form id="inputs" class="input-form">
       Dimension (N-by-N grid): <input type="radio" name="dimension" value="3x3" checked> 3x3
       <input type="radio" name="dimension" value="4x4"> 4x4
       <input type="radio" name="dimension" value="5x5"> 5x5<br>
-      Shuffle Times : <input type="text" id="shuffleTimes" value="12"><br>
+      Shuffle Times : <input type="text" id="shuffleTimes" value="12"> <div class="">
+        Tips: Shuffle for too many times and solve it will freeze your browser!
+      </div> <br>
       <button type='button' id="button" onclick="return simulate()">Run & Shuffle</button>
       <button type='button' id="button" onclick="return simulateBFS()">BFS</button>
       <button type='button' id="button" onclick="return simulateAStar()">A*</button>
@@ -26,16 +39,20 @@
     <canvas id="animation" width="500" height="500">
 
     </canvas>
-    <p id="insert">Run Time:</p>
-    <h2>Algorithm Used</h2>
-    <h3>Breadth First Search(BFS)</h3>
-      <p>This is the most well known graph search algorithm. For each visited node, we immediately generate its childen and store it to the queue.
+    <p id="insert" class="runtime">Run Time:</p>
+    <h3 class="h3">Algorithms</h3>
+    <h4 class="h4">Breadth First Search(BFS)</h4>
+      <p class="bfs">This is the most well known graph search algorithm. For each visited node, we immediately generate its childen and store it to the queue.
         and we will recursively do this util the queue is empty or the end state is reached.
         But, it is too slow. If you increase the shuffle time, the browser will crush.
       </p>
-    <h3>A* (Manhattan distance)</h3>
-      <p>
-        This works
+    <h4 class="h4">A* (Manhattan distance)</h4>
+      <p class="astar">
+        This works similarly to BFS. Instead of using a queue, we use a priority queue(MinHeap). For each state, we will assign a value to it.
+        For here, we calculates the Manhattan distance between the current pisition to the final position.
+        And, the priority will return the element with the lowest value.
+        The MinHeap code is from <a href="http://www.digitaltsunami.net/projects/javascript/minheap/index.html">here</a>
+
       </p>
   </body>
 </html>

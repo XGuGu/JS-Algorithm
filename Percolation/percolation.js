@@ -146,7 +146,7 @@ class Draw {
     for (var i = 1; i < this.size + 1; i++) {
       for (var j = 1; j < this.size + 1; j++) {
         if (this.percolate.isFull(i, j)) {
-          this.ctx.fillStyle = "blue";
+          this.ctx.fillStyle = "#65C3F2";
           this.ctx.fillRect(this.position(j), this.position(i), this.gridLength, this.gridLength);
         } else if (this.percolate.isOpen(i, j)) {
           this.ctx.fillStyle = "white";
@@ -161,13 +161,16 @@ class Draw {
   }
 }
 
+let interval;
+
 function simulate() {
-  let size = 30;
-  let delay = 50;
+  document.getElementById("percolates").innerHTML = "";
+  clearInterval(interval);
+  let size = +document.getElementById("size").value;
+  let delay = +document.getElementById("delay").value;
   let percolate = new Percolation(size);
   let drawP = new Draw(size, percolate);
   let count = 0;
-  let interval;
 
   function randomOpen() {
     let i = Math.floor(Math.random() * size + 1);
@@ -185,6 +188,9 @@ function simulate() {
       randomOpen();
       count++;
       drawP.drawGrids();
+      let percentage = parseFloat((count / (size * size)) * 100).toFixed(2);
+      let info = "Open grids: " + count + ". Open percentage: " + percentage + "%";
+      document.getElementById("percolates").innerHTML = info;
     } else {
       clearInterval(interval);
     }
@@ -196,6 +202,9 @@ function simulate() {
       count++;
     }
     drawP.drawGrids();
+    let percentage = parseFloat((count / (size * size)) * 100).toFixed(2);
+    let info = "Open grids: " + count + ". Open percentage: " + percentage + "%";
+    document.getElementById("percolates").innerHTML = info;
   }
 
   if (delay === 0) {
@@ -206,3 +215,12 @@ function simulate() {
   }
 
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+  var canvas = document.getElementById('animation');
+  // debugger
+  var ctx = canvas.getContext('2d');
+  ctx.fillStyle = "lightgrey";
+  ctx.fillRect(0,0,500,500);
+
+});

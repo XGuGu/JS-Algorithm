@@ -2,16 +2,48 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Percolation Visualization</title>
+    <title></title>
     <script type="text/javascript" src="percolation.js"></script>
+    <link rel="stylesheet" href="percolation.css">
   </head>
   <body>
-    <h1> Percolation Visualization </h1>
-    <button type='button' id="button" onclick="return simulate()">Run Simulation</button>
-    <canvas id="animation" width="600" height="600">
-        Percolation Visualization (include img)
-    </canvas>
+    <div class="header">
+      <h1> Percolation</h1>
+      <div class="info">
+        Created by:
+        <a href="#">Lingjie Zhang</a>
+        <a href="https://github.com/XGuGu/JS-Algorithm">GitHub</a>
+        <a href="https://www.linkedin.com/in/lingjie-zhang-1109b5171/">LinkedIn</a>
+      </div>
+    </div>
+    <div class="wrapper">
+      <h3>The problem</h3>
+      <p class="problem">Estimate the value of the percolation threshold via Monte Carlo simulation.</p>
+      <p class="details">
+        Details for this problem is from <a href="http://coursera.cs.princeton.edu/algs4/assignments/percolation.html">here</a>.
+      </p>
+      <h3>The model</h3>
+      <p class="model">
+        We model a percolation system using an n-by-n grid of sites.
+        Each site is either open or blocked.
+        A full site is an open site that can be connected to an open site in the top row via a chain of neighboring (left, right, up, down) open sites.
+        We say the system percolates if we fill all open sites connected to the top row and that process fills some open site on the bottom row.
+      </p>
 
-    <p id="percolates"></p>
+    </div>
+    <form class="input-form">
+      Grid Size (N-by-N grid) : <input type="text" id="size" value="20"><br>
+      Delay : <input type="text" id="delay" value="50"> ms<br>
+      <button type='button' id="button" onclick="return simulate()">Run Simulation</button>
+    </form>
+    <canvas id="animation" width="500" height="500">
+    </canvas>
+    <div class="data">
+      <p id="percolates">Open grids: 0. Open percentage: 0.00 %</p>
+    </div>
+
+    <h3 class="h3">Algorithm</h3>
+    <h4 class="h4">Weighted Quick Union</h4>
+    <img class='image' src="https://s3.amazonaws.com/leighhalliday/manual/weighted-quick-union.png" alt="">
   </body>
 </html>
