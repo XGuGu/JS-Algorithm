@@ -3,46 +3,90 @@
     border-bottom: 1px solid #dbdbdb;
 }
 
+.container {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 150px;
+  padding-right: 150px;
+}
+
+.nav-icon {
+  display: flex;
+}
+
+li {
+  list-style-type:none;
+}
+
+.h1 {
+  font-size: 30px;
+}
+
 .header a {
-    color: #5a5a5a;
-    font-size: 11px;
-    font-weight: bold;
-    text-decoration: none;
+  color: #5a5a5a;
+  font-size: 11px;
+  font-weight: bold;
+  text-decoration: none;
+  font-family: sans-serif;
 }
 
 .icon {
   width: 40px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
+.iconperson {
+  width:53px;
+  position: relative;
+  top: -6px;
+  padding-left: 15px;
+  padding-right: 20px;
+}
+
+
+.full-projects {
+  margin-left: 150px;
+}
 .projects h2 {
-    margin-bottom: 30px;
+  margin-bottom: 30px;
 }
 
 .projects p {
-    font-size: 11px;
-    font-weight: bold;
-    text-align: center;
+  font-size: 11px;
+  font-weight: bold;
+  text-align: center;
 }
 
 .nav {
-    display: inline;
-    line-height: 55px;
+  display: inline;
+  line-height: 55px;
 }
 
 .full-projects h2 {
-    margin-bottom: 30px;
+  margin-bottom: 30px;
 }
 
 .full-projects p {
-    font-size: 12px;
+  font-size: 16px;
+}
+
+.h2 {
+  font-weight: 800;
+  font-family: sans-serif;
+  font-size: 24px;
 }
 
 a.project-list {
-    font-size: 18px;
+  font-size: 18px;
+  color: #428bca;
+  text-decoration: none;
 }
 
-a.blog-link {
-    font-size: 12px;
+a.project-list:hover {
+  font-size: 18px;
+  color: #2a6496;
+  text-decoration: underline;
 }
 
 .caption {
@@ -51,8 +95,4 @@ a.blog-link {
 
 .projectImg {
   height: 200px;
-}
-
-.about h2 {
-    margin-bottom: 30px;
 }
