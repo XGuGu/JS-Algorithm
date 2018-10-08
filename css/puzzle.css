@@ -11,6 +11,11 @@
   margin-left: 20px;
 }
 
+.homebutton {
+  text-decoration: none;
+  font-weight: 800;
+}
+
 .input-form {
   margin-left: 100px;
 }
