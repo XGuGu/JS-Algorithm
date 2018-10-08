@@ -3,10 +3,45 @@
   <head>
     <meta charset="utf-8">
     <title>Index Page</title>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+	   <link rel="stylesheet" href="css/index.css">
   </head>
   <body>
-    <h1>Index Page</h1>
-    <a href="Percolation/percolation.html">Percolation Problem</a>
-    <a href="EightPuzzle/puzzle.html">8 Puzzle Problem</a>
+        <div class="header">
+            <div class="container">
+                <a href="index.html" class="pull-left">
+                    <h1>Lingjie Zhang</h1>
+                </a>
+                <ul class="nav nav-pills pull-right">
+                    <li><a href="projects.html"><img class="icon" src="image/icons/Github.png"></a></li>
+                    <li><a href="about.html"><img class="icon"src="image/icons/LinkedIn.png"></a></li>
+                    <li><a href="#">Personal Site</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="full-projects">
+            <div class="container">
+                <h2>Algorithm Projects (JavaScript)</h2>
+                <a href="Percolation/percolation.html" class="project-list">
+                    1. Percolation
+                </a>
+                <div class="caption">
+                  <img class="projectImg"src="image/percolation.png" alt="">
+                  <p>
+                    A algorithm visualization for a percolation model. Using union-find and optimized to weighted-quick-union.
+                  </p>
+                </div>
+                <a href="EightPuzzle/puzzle.html" class="project-list">
+                    2. 8 Puzzle Solver
+                </a>
+                <div class="caption">
+                  <img class="projectImg"src="image/8puzzle.png" alt="">
+                  <p>
+                    Solve the sliding puzzle with different graph algorithms.
+                  </p>
+                </div>
+            </div>
+        </div>
   </body>
 </html>

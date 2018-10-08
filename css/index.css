@@ -1,0 +1,58 @@
+.header {
+    background-color: #f7f7f7;
+    border-bottom: 1px solid #dbdbdb;
+}
+
+.header a {
+    color: #5a5a5a;
+    font-size: 11px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.icon {
+  width: 40px;
+}
+
+.projects h2 {
+    margin-bottom: 30px;
+}
+
+.projects p {
+    font-size: 11px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.nav {
+    display: inline;
+    line-height: 55px;
+}
+
+.full-projects h2 {
+    margin-bottom: 30px;
+}
+
+.full-projects p {
+    font-size: 12px;
+}
+
+a.project-list {
+    font-size: 18px;
+}
+
+a.blog-link {
+    font-size: 12px;
+}
+
+.caption {
+    margin-bottom: 40px;
+}
+
+.projectImg {
+  height: 200px;
+}
+
+.about h2 {
+    margin-bottom: 30px;
+}

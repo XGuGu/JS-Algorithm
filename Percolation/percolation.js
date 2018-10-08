@@ -220,7 +220,7 @@ document.addEventListener('DOMContentLoaded', () => {
   var canvas = document.getElementById('animation');
   // debugger
   var ctx = canvas.getContext('2d');
-  ctx.fillStyle = "lightgrey";
+  ctx.fillStyle = "white";
   ctx.fillRect(0,0,500,500);
 
 });
