@@ -388,26 +388,30 @@ class Draw {
 //   skew = 34;
 // }
 // var canvas = document.getElementById("animation");
+
+
+
+
+let dimension = 3;
+
+let font = "60px Georgia";
+let skew = 70;
+let topskew = 100;
+let size
+let puzzle
+let interval;
+let shuffleTimes;
+
 document.addEventListener('DOMContentLoaded', () => {
   var canvas = document.getElementById('animation');
   // debugger
   var ctx = canvas.getContext('2d');
   ctx.fillStyle = "white";
   ctx.fillRect(0,0,500,500);
-
+  let puzzle = new Puzzle(3);
+  let drawP = new Draw(3, puzzle);
+  drawP.drawGrids(3, puzzle);
 });
-
-
-
-
-let dimension;
-let font;
-let skew;
-
-let size
-let puzzle
-let interval;
-let shuffleTimes;
 
 function simulate() {
   document.getElementById("insert").innerHTML = "Run Time:";
@@ -464,10 +468,21 @@ function simulate() {
   size = dimension;
   puzzle = new Puzzle(size);
 
+  function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  async function demo() {
+    console.log('Taking a break...');
+    await sleep(2000);
+    console.log('Two seconds later');
+  }
 
   let drawP = new Draw(size, puzzle);
   drawP.drawGrids(size, puzzle);
+  demo();
   let i = 0;
+
 
   function shuffle() {
     let allowed = puzzle.getAllowedMoves();
