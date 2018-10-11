@@ -44,13 +44,13 @@
     <h3 class="h3">Algorithms</h3>
     <h4 class="h4">Breadth First Search(BFS)</h4>
       <p class="bfs">This is the most well known graph search algorithm. For each visited node, we immediately generate its childen and store it to the queue.
-        and we will recursively do this util the queue is empty or the end state is reached.
-        But, it is too slow. If you increase the shuffle time, the browser will crush.
+        and we will recursively do this until the queue is empty or the end state is reached.
+        But, it is too slow. If you increase the shuffle time, the browser will crash.
       </p>
     <h4 class="h4">A* (Manhattan distance)</h4>
       <p class="astar">
         This works similarly to BFS. Instead of using a queue, we use a priority queue(MinHeap). For each state, we will assign a value to it.
-        For here, we calculates the Manhattan distance between the current pisition to the final position.
+        For here, we calculate the Manhattan distance between the current position to the final position.
         And, the priority will return the element with the lowest value.
         The MinHeap code is from <a href="http://www.digitaltsunami.net/projects/javascript/minheap/index.html">here</a>
 
