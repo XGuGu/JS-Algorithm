@@ -4,7 +4,6 @@ Problem description: http://coursera.cs.princeton.edu/algs4/assignments/percolat
 
 I would like to make a visualized demo for the Percolation Problem. The algorithm used will be the weighted quick union.
 
-
 ## MVP List:
 1. Modal: a n-by-n grid of sites, each grid can be either opened or blocked.
 2. Visualization of simulation
