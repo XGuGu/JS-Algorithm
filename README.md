@@ -9,5 +9,11 @@ I would like to make a visualized demo for the Percolation Problem. The algorith
 2. Visualization of simulation
 3. Problem analysis
 
+# Eight Puzzle
+
+## MVP List:
+1. Design and simulate the eight puzzle problem.
+2. Visualization of simulation
+
 
 If there is more time, I would like to add more algorithm demo to this project. Like: sorting algorithms.
